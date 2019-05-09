@@ -60,7 +60,7 @@ public class Main {
                 for (int i = 0; i < 15 - str.length(); i++){
                     System.out.print("#");
                 }
-                System.out.println("/n");
+                System.out.println();
             }
         }
 
