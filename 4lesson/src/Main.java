@@ -20,7 +20,7 @@ public class Main {
             humanTurn();
             compTurn();
             System.out.println(n);
-            if ((n <= SIZE + 1) && Check()){
+            if ((n <= SIZE + 1) && Check() || n == 0){
                 break;
             }
 
@@ -64,20 +64,20 @@ public class Main {
     public static boolean isValid(int x, int y){
         if (x < 0 || y < 0 || x >= SIZE || y >= SIZE){
             System.out.println("Неверные координаты \n"); return false;}
-        if (map[x][y] == DOT_EMPTY){n = n - 1; return true;}
+        if (map[x][y] == DOT_EMPTY){n--; return true;}
         else {return false;}
     }
     public static void compTurn(){
+        if (n != 0){
         int x, y;
         do{
             x = rand.nextInt(SIZE);
             y = rand.nextInt(SIZE);
         }while(!isValid(x, y));
         map[x][y] = DOT_0;
-        if (n != 0){printMap();}
+        printMap();}
     }
     public static boolean Check(){
-
         int[] sumX = new int[SIZE + 1];
         int[] sumX1 = new int[SIZE + 1];
         int[] sum0 = new int[SIZE + 1];
@@ -103,9 +103,9 @@ public class Main {
                 if (i == SIZE - 1 - j  && map[i][j] == DOT_0){sum01[SIZE]++; if (sum01[SIZE] == DOTS_TO_WIN){
                     System.out.println("Выиграл компьютер \n");return true;}}
                 if (map[i][j] == DOT_0){sum0[j]++;if (sum0[j] == DOTS_TO_WIN){
-                    System.out.println("Выиграл человек \n");return true;}}
+                    System.out.println("Выиграл компьютер \n");return true;}}
                 if (map[i][j] == DOT_0){sum01[i]++;if (sum01[i] == DOTS_TO_WIN){
-                    System.out.println("Выиграл человек \n");return true;}}
+                    System.out.println("Выиграл компьютер \n");return true;}}
             }
 
         }
