@@ -8,8 +8,10 @@ public class Main {
         empl[4] = new Employee("Дмитриев Дмитрий Дмитриевич","технолог","zxc@g.com","+791111111",30000,30);
 
         for (int i = 0; i < empl.length; i++){
-            System.out.println((i + 1) + "-й сотрудник:\n");
-            empl[i].Information();
+            if (empl[i].age >= 40) {
+                System.out.println("сотрудник:\n");
+                empl[i].Information();
+            }
         }
 
     }
