@@ -47,10 +47,5 @@ public class GameWindow extends JFrame {
     public void startNewGame(int mode, int fieldSizeX, int fieldSizeY, int winLength){
         field.startNewGame(mode,fieldSizeX,fieldSizeY,winLength);
     }
-    public void fieldUpdate(int[][] fields){
-        field.field = fields;
-    }
-    public int[][] fieldGet(){
-        return field.field;
-    }
+
 }

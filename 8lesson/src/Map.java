@@ -7,7 +7,7 @@ import java.util.Random;
 public class Map extends JPanel {
     public static final  int MODE_HUMAN_VS_AI = 0;
     public static final  int MODE_HUMAN_VS_HUMAN = 1;
-    int[][] field;
+    char[][] field;
     int fieldSizeX;
     int fieldSizeY;
     int winLength;
@@ -34,20 +34,25 @@ public class Map extends JPanel {
         int cellX = e.getX() / cellWidth;
         int cellY = e.getY() / cellHeight;
         System.out.println(cellX + " " + cellY);
-        if (TicTacToe.isValid(cellX,cellY,field)){
-            field[cellX][cellY] = 1;
-            int SIZE = field.length;
+        boolean check = false;
+
+         if(TicTacToe.n != 0 && TicTacToe.isValid(cellX,cellY)){ //TicTacToe.isValid(cellX,cellY) && TicTacToe.n != -1
+            TicTacToe.map[cellX][cellY] = TicTacToe.DOT_X;
+            check = true;}
+
+
+         if(check && TicTacToe.n > 0){
             Random rand = new Random();
-
             int x, y;
-            do{
-                x = rand.nextInt(SIZE);
-                y = rand.nextInt(SIZE);
-            }while(!TicTacToe.isValid(x, y, field));
-            field[x][y] = 2;
-        }
+            do {
+                x = rand.nextInt(TicTacToe.SIZE);
+                y = rand.nextInt(TicTacToe.SIZE);
+            } while (!TicTacToe.isValid(x, y) && TicTacToe.n != 0);
+            TicTacToe.map[x][y] = TicTacToe.DOT_0;
+         }
+            if (TicTacToe.Check()){TicTacToe.n = 0;}
         repaint();
-
+        System.out.println("N = " + TicTacToe.n);
     }
 
 
@@ -57,7 +62,14 @@ public class Map extends JPanel {
         this.fieldSizeY = fieldSizeY;
         this.winLength = winLength;
 
-        field = new int[fieldSizeY][fieldSizeX];
+        field = new char[fieldSizeY][fieldSizeX];
+        TicTacToe.map = field;
+        TicTacToe.DOTS_TO_WIN = winLength;
+        TicTacToe.SIZE = fieldSizeX;
+        TicTacToe.n = fieldSizeX * fieldSizeY;
+        TicTacToe.initMap();
+        TicTacToe.printMap();
+
         isInit = true;
         repaint();
     }
@@ -92,9 +104,9 @@ public class Map extends JPanel {
             int y = i * cellHeight;
             for(int j = 0; j < fieldSizeX; j++){
                 int x = j * cellWidth;
-                if (field[j][i] == 2){
+                if (TicTacToe.map[j][i] == TicTacToe.DOT_0){
                     g.drawOval(x + 4, y + 4, cellWidth - 8, cellHeight - 8);}
-                else if (field[j][i] == 1){
+                else if (TicTacToe.map[j][i] == TicTacToe.DOT_X){
                     g.drawLine(x, y,x + cellWidth,y + cellHeight);
                     g.drawLine(x + cellWidth,y, x, y + cellHeight);
                 }
