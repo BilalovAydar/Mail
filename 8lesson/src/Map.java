@@ -53,6 +53,7 @@ public class Map extends JPanel {
             if (TicTacToe.Check()){TicTacToe.n = 0;}
         repaint();
         System.out.println("N = " + TicTacToe.n);
+        System.out.println("Ходы...");
     }
 
 
